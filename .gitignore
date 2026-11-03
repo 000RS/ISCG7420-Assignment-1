@@ -5,3 +5,24 @@ __pycache__/
 .env
 .DS_Store
 db.sqlite3
+
+# React dependencies
+frontend/node_modules/
+frontend/build/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+!frontend/.env.example
+
+# Python virtual environments
+.venv/
+venv/
+
+# Local database
+db.sqlite3
+
+# Python cache
+__pycache__/
+*.pyc
