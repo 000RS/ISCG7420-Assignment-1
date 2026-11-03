@@ -1,5 +1,6 @@
 from django.urls import path
 from .import views
+from . import api_views
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -25,6 +26,11 @@ urlpatterns = [
 
     path('dashboard/patients/', views.patient_list, name = 'patient_list'),
     path('dashboard/patients/<int:patient_id>/toggle-active/', views.patient_toggle_active, name = 'patient_toggle_active'),
+
+    path('api/doctors/', api_views.doctor_list_api, name='api_doctor_list'),
+    path('api/slots/', api_views.available_slots_api, name='api_available_slots'),
+    path('api/login/', api_views.login_api, name='api_login'),
+
 
 
 
