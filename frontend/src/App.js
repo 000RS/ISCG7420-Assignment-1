@@ -20,10 +20,10 @@ function Login({ onLogin }) {
 }
 
 function Register({ onLogin }) {
-  const [form, setForm] = useState({ username:'', password:'', email:'' });
+  const [form, setForm] = useState({first_name: '', last_name: '', username: '', email: '', password: ''});
   const [error, setError] = useState(''); const navigate = useNavigate();
   async function register(e) { e.preventDefault(); setError(''); try { const { data } = await api.post('register/', form); localStorage.setItem('token', data.token); onLogin(data.user); navigate('/doctors'); } catch(err) { setError(messageFromError(err)); } }
-  return <section className="panel narrow"><h2>Patient registration</h2><form onSubmit={register} className="stack">{['username','email','password'].map(key => <label key={key}>{key}<input type={key==='password' ? 'password' : key==='email' ? 'email' : 'text'} value={form[key]} onChange={e => setForm({...form,[key]:e.target.value})} required={key!=='email'} /></label>)}<button>Create account</button></form>{error && <p className="error">{error}</p>}</section>;
+  return <section className="panel narrow"><h2>Patient registration</h2><form onSubmit={register} className="stack">{['first_name','last_name','username','email','password'].map(key => <label key={key}>{key}<input type={key==='password' ? 'password' : key==='email' ? 'email' : 'text'} value={form[key]} onChange={e => setForm({...form,[key]:e.target.value})} required={key!=='email'} /></label>)}<button>Create account</button></form>{error && <p className="error">{error}</p>}</section>;
 }
 
 function Doctors() {

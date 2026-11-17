@@ -62,8 +62,11 @@ def register_api(request):
     user = User.objects.create_user(
         username=username,
         password=password,
-        email=email
+        email=email,
+        first_name=str(request.data.get('first_name', '')).strip(),
+        last_name=str(request.data.get('last_name', '')).strip()
     )
+
     token = Token.objects.create(user=user)
 
     return Response({
