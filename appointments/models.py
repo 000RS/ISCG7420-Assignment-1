@@ -32,7 +32,7 @@ class Appointment(models.Model):
 
     patient = models.ForeignKey(User, on_delete=models.CASCADE)
     slot = models.OneToOneField(AppointmentSlot, on_delete=models.CASCADE)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='Pending')
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
     reason = models.TextField(blank=True)
 
     def __str__(self):

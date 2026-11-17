@@ -363,8 +363,21 @@ def appointment_detail_api(request, pk):
         partial=True
     )
     serializer.is_valid(raise_exception=True)
-    serializer.save()
 
+    if request.data.get('status') == 'cancelled':
+        with transaction.atomic():
+            slot = AppointmentSlot.objects.select_for_update().get(
+                pk=appointment.slot_id
+            )
+            appointment.delete()
+            slot.is_available = True
+            slot.save(update_fields=['is_available'])
+
+        return Response({
+            'message': 'Appointment cancelled and slot released.'
+        })
+
+    serializer.save()
     return Response(serializer.data)
 
 
